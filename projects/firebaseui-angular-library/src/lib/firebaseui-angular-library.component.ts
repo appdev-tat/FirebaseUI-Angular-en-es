@@ -12,7 +12,7 @@ import {
   FirebaseUISignInSuccessWithAuthResult,
   NativeFirebaseUIAuthConfig,
 } from './firebaseui-angular-library.helper';
-import * as firebaseui from 'firebaseui';
+import * as firebaseui from 'firebaseui-en-es/dist/npm__es';
 // noinspection ES6UnusedImports
 import * as firebase from 'firebase/app';
 import {User} from 'firebase/app';

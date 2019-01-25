@@ -47,7 +47,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/firebaseui/dist/firebaseui.css"
+              "node_modules/firebaseui-en-es/dist/firebaseui.css"
             ],
             "scripts": []
           },

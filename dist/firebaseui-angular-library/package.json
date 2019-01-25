@@ -1,5 +1,5 @@
 {
-  "name": "firebaseui-angular",
+  "name": "firebaseui-angular-es",
   "version": "3.4.1",
   "repository": {
     "type": "git",
@@ -25,5 +25,18 @@
     "@angular/fire": "5.0.0",
     "git+https://github.com/appdev-tat/firebaseui-web-en-es": "^3.5.2",
     "firebase": "^5.3.1"
+  },
+  "main": "bundles/firebaseui-angular.umd.js",
+  "module": "fesm5/firebaseui-angular.js",
+  "es2015": "fesm2015/firebaseui-angular.js",
+  "esm5": "esm5/firebaseui-angular.js",
+  "esm2015": "esm2015/firebaseui-angular.js",
+  "fesm5": "fesm5/firebaseui-angular.js",
+  "fesm2015": "fesm2015/firebaseui-angular.js",
+  "typings": "firebaseui-angular.d.ts",
+  "metadata": "firebaseui-angular.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
   }
 }

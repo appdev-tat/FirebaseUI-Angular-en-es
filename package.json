@@ -1,5 +1,5 @@
 {
-  "name": "firebaseui-angular",
+  "name": "firebaseui-angular-es",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -33,7 +33,7 @@
     "@angular/router": "7.0.2",
     "core-js": "^2.5.7",
     "firebase": "^5.5.7",
-    "firebaseui": "^3.4.1",
+    "firebaseui-en-es": "git+https://github.com/appdev-tat/firebaseui-web-en-es.git",
     "rxjs": "^6.3.3",
     "zone.js": "^0.8.26"
   },

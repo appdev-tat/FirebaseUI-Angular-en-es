@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import * as firebaseui from 'firebaseui';
+import * as firebaseui from 'firebaseui-en-es/dist/npm__es';
 
 @Injectable({
   providedIn: 'root'
