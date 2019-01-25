@@ -36,7 +36,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {FirebaseUIModule} from 'firebaseui-angular';
 import * as firebase from 'firebase/app';
-import * as firebaseui from 'firebaseui-en-es/dist/npm__es';
+import * as firebaseui from 'firebaseui-en-es/dist/npm__en';
 // currently there is a bug while building the app with --prod
 // - https://github.com/RaphaelJenni/FirebaseUI-Angular/issues/76
 // the plugin exposes the two libraries as well. You can use those:
@@ -154,7 +154,7 @@ Make sure the version number matches the version of firebaseui you have installe
 Once everything is set up, you can use the component in your Angular application:
 
 ```angular2html
-<firebase-ui-es></firebase-ui-es>
+<firebase-ui-en></firebase-ui-en>
 ```
 
 ### Configuration
@@ -201,9 +201,9 @@ Don't forget to unsubscribe at the end.
 ### Sign-in success / failure callbacks
 
 ```html
-<firebase-ui-es
+<firebase-ui-en
     (signInSuccessWithAuthResult)="successCallback($event)"
-    (signInFailure)="errorCallback($event)"></firebase-ui-es>
+    (signInFailure)="errorCallback($event)"></firebase-ui-en>
 ```
 
 ```typescript

@@ -1,6 +1,6 @@
 import * as firebaseOriginal from 'firebase/app';
 import UserCredential = firebase.auth.UserCredential;
-import * as firebaseuiOriginal from 'firebaseui-en-es/dist/npm__es';
+import * as firebaseuiOriginal from 'firebaseui-en-es/dist/npm__en';
 export declare const firebase: typeof firebaseOriginal;
 export declare const firebaseui: any;
 /**

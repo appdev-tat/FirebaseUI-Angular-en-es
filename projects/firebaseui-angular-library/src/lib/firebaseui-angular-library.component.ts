@@ -12,7 +12,7 @@ import {
   FirebaseUISignInSuccessWithAuthResult,
   NativeFirebaseUIAuthConfig,
 } from './firebaseui-angular-library.helper';
-import * as firebaseui from 'firebaseui-en-es/dist/npm__es';
+import * as firebaseui from 'firebaseui-en-es/dist/npm__en';
 // noinspection ES6UnusedImports
 import * as firebase from 'firebase/app';
 import {User} from 'firebase/app';
@@ -27,7 +27,7 @@ import PhoneAuthProvider = firebase.auth.PhoneAuthProvider;
 import UserCredential = firebase.auth.UserCredential;
 
 @Component({
-  selector: 'firebase-ui-es',
+  selector: 'firebase-ui-en',
   template: '<div id="firebaseui-auth-container"></div>'
 })
 export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
