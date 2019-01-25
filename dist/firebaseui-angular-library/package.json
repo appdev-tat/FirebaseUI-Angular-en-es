@@ -3,7 +3,7 @@
   "version": "3.4.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/appdev-tat/FirebaseUI-Angular-es"
+    "url": "https://github.com/RaphaelJenni/firebaseui-angular"
   },
   "author": {
     "name": "Raphael Jenni",
