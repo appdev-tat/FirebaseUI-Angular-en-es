@@ -27,7 +27,7 @@ import PhoneAuthProvider = firebase.auth.PhoneAuthProvider;
 import UserCredential = firebase.auth.UserCredential;
 
 @Component({
-  selector: 'firebase-ui',
+  selector: 'firebase-ui-es',
   template: '<div id="firebaseui-auth-container"></div>'
 })
 export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {

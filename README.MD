@@ -154,7 +154,7 @@ Make sure the version number matches the version of firebaseui you have installe
 Once everything is set up, you can use the component in your Angular application:
 
 ```angular2html
-<firebase-ui></firebase-ui>
+<firebase-ui-es></firebase-ui-es>
 ```
 
 ### Configuration
@@ -201,9 +201,9 @@ Don't forget to unsubscribe at the end.
 ### Sign-in success / failure callbacks
 
 ```html
-<firebase-ui
+<firebase-ui-es
     (signInSuccessWithAuthResult)="successCallback($event)"
-    (signInFailure)="errorCallback($event)"></firebase-ui>
+    (signInFailure)="errorCallback($event)"></firebase-ui-es>
 ```
 
 ```typescript
