@@ -16,7 +16,9 @@ export declare class FirebaseuiAngularLibraryComponent implements OnInit, OnDest
     signInSuccessCallback: EventEmitter<FirebaseUISignInSuccess>;
     signInSuccessWithAuthResultCallback: EventEmitter<FirebaseUISignInSuccessWithAuthResult>;
     signInFailureCallback: EventEmitter<FirebaseUISignInFailure>;
+    language: string;
     private subscription;
+    private firebaseuiLibrary;
     private static getAuthProvider;
     constructor(angularFireAuth: AngularFireAuth, _firebaseUiConfig: NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig, _firebaseUiConfig_Feature: NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig, ngZone: NgZone, firebaseUIService: FirebaseuiAngularLibraryService);
     readonly firebaseUiConfig: NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig;

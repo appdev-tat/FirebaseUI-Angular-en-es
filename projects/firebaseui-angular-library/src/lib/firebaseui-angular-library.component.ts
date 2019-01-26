@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, NgZone, OnDestroy, OnInit, Output, Input} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Subscription} from 'rxjs';
 import {
@@ -12,7 +12,8 @@ import {
   FirebaseUISignInSuccessWithAuthResult,
   NativeFirebaseUIAuthConfig,
 } from './firebaseui-angular-library.helper';
-import * as firebaseui from 'firebaseui-en-es/dist/npm__es';
+import * as firebaseuiEs from 'firebaseui-en-es/dist/npm__es';
+import * as firebaseuiEn from 'firebaseui-en-es/dist/npm__en';
 // noinspection ES6UnusedImports
 import * as firebase from 'firebase/app';
 import {User} from 'firebase/app';
@@ -27,7 +28,7 @@ import PhoneAuthProvider = firebase.auth.PhoneAuthProvider;
 import UserCredential = firebase.auth.UserCredential;
 
 @Component({
-  selector: 'firebase-ui-es',
+  selector: 'firebase-ui',
   template: '<div id="firebaseui-auth-container"></div>'
 })
 export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
@@ -40,8 +41,12 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
 
   @Output('signInSuccessWithAuthResult') signInSuccessWithAuthResultCallback: EventEmitter<FirebaseUISignInSuccessWithAuthResult> = new EventEmitter(); // tslint:disable-line
   @Output('signInFailure') signInFailureCallback: EventEmitter<FirebaseUISignInFailure> = new EventEmitter(); // tslint:disable-line
+  // language must be either 'en' or 'es'
+  @Input('language') language: string = 'en'; // tslint:disable-line
 
   private subscription: Subscription;
+
+  private firebaseuiLibrary: any;
 
   private static getAuthProvider(provider: AuthProvider): string {
     switch (provider) {
@@ -65,6 +70,13 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
               @Inject('firebaseUIAuthConfigFeature') private _firebaseUiConfig_Feature: NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig,
               private ngZone: NgZone,
               private firebaseUIService: FirebaseuiAngularLibraryService) {
+      if ( this.language === 'en' ) {
+        this.firebaseuiLibrary = firebaseuiEn;
+      } else if ( this.language === 'es' ) {
+        this.firebaseuiLibrary = firebaseuiEs;
+      } else {
+        console.error( 'Language must be either "en" or "es"' );
+      }
   }
 
   get firebaseUiConfig(): NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig {
@@ -146,14 +158,14 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
     let credentialHelper;
     switch (authConfig.credentialHelper) {
       case CredentialHelper.None:
-        credentialHelper = firebaseui.auth.CredentialHelper.NONE;
+        credentialHelper = this.firebaseuiLibrary.auth.CredentialHelper.NONE;
         break;
       case CredentialHelper.OneTap:
-        credentialHelper = firebaseui.auth.CredentialHelper.GOOGLE_YOLO;
+        credentialHelper = this.firebaseuiLibrary.auth.CredentialHelper.GOOGLE_YOLO;
         break;
       case CredentialHelper.AccountChooser:
       default:
-        credentialHelper = firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM;
+        credentialHelper = this.firebaseuiLibrary.auth.CredentialHelper.ACCOUNT_CHOOSER_COM;
         break;
     }
 
@@ -197,7 +209,9 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
   }
 
   private firebaseUIPopup() {
-    const firebaseUiInstance = this.firebaseUIService.firebaseUiInstance;
+    const firebaseUiInstance = ( this.language === 'en' ) ?
+      this.firebaseUIService.firebaseUiEnInstance :
+      this.firebaseUIService.firebaseUiEsInstance;
     const uiAuthConfig = this.getUIAuthConfig();
 
     // Check if callbacks got computed to reset them again after providing the to firebaseui.
@@ -227,7 +241,7 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
       return this.firebaseUiConfig.signInSuccessUrl;
     };
 
-    const signInFailureCallback = (error: firebaseui.auth.AuthUIError) => {
+    const signInFailureCallback = (error: firebaseuiEn.auth.AuthUIError) => {
       this.ngZone.run(() => {
         this.signInFailureCallback.emit({
           code: error.code,
