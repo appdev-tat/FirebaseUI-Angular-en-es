@@ -12,8 +12,6 @@ import {
   FirebaseUISignInSuccessWithAuthResult,
   NativeFirebaseUIAuthConfig,
 } from './firebaseui-angular-library.helper';
-import * as firebaseuiEs from 'firebaseui-en-es/dist/npm__es';
-import * as firebaseuiEn from 'firebaseui-en-es/dist/npm__en';
 // noinspection ES6UnusedImports
 import * as firebase from 'firebase/app';
 import {User} from 'firebase/app';
@@ -26,6 +24,8 @@ import GithubAuthProvider = firebase.auth.GithubAuthProvider;
 import EmailAuthProvider = firebase.auth.EmailAuthProvider;
 import PhoneAuthProvider = firebase.auth.PhoneAuthProvider;
 import UserCredential = firebase.auth.UserCredential;
+
+declare var require: any
 
 @Component({
   selector: 'firebase-ui',
@@ -42,7 +42,7 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
   @Output('signInSuccessWithAuthResult') signInSuccessWithAuthResultCallback: EventEmitter<FirebaseUISignInSuccessWithAuthResult> = new EventEmitter(); // tslint:disable-line
   @Output('signInFailure') signInFailureCallback: EventEmitter<FirebaseUISignInFailure> = new EventEmitter(); // tslint:disable-line
   // language must be either 'en' or 'es'
-  @Input('language') language: string = 'en'; // tslint:disable-line
+  @Input() language: string; // tslint:disable-line
 
   private subscription: Subscription;
 
@@ -70,13 +70,6 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
               @Inject('firebaseUIAuthConfigFeature') private _firebaseUiConfig_Feature: NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig,
               private ngZone: NgZone,
               private firebaseUIService: FirebaseuiAngularLibraryService) {
-      if ( this.language === 'en' ) {
-        this.firebaseuiLibrary = firebaseuiEn;
-      } else if ( this.language === 'es' ) {
-        this.firebaseuiLibrary = firebaseuiEs;
-      } else {
-        console.error( 'Language must be either "en" or "es"' );
-      }
   }
 
   get firebaseUiConfig(): NativeFirebaseUIAuthConfig | FirebaseUIAuthConfig {
@@ -87,6 +80,16 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if ( ['en','es'].indexOf(this.language) === -1 ) {
+      console.error( 'Language must be either "en" or "es"' );
+      return;
+    } else {
+      this.firebaseuiLibrary = ( this.language === 'en' ) ?
+        require( 'firebaseui-en-es/dist/npm__en' ) :
+        require( 'firebaseui-en-es/dist/npm__es' );
+      this.firebaseUIService.init( this.firebaseuiLibrary );
+    }
+
     this.subscription = this.angularFireAuth.authState.subscribe((value: User) => {
       if ((value && value.isAnonymous) || !value) {
         if ((this.firebaseUiConfig as FirebaseUIAuthConfig).providers) {
@@ -209,9 +212,6 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
   }
 
   private firebaseUIPopup() {
-    const firebaseUiInstance = ( this.language === 'en' ) ?
-      this.firebaseUIService.firebaseUiEnInstance :
-      this.firebaseUIService.firebaseUiEsInstance;
     const uiAuthConfig = this.getUIAuthConfig();
 
     // Check if callbacks got computed to reset them again after providing the to firebaseui.
@@ -223,7 +223,7 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
     }
 
     // show the firebaseui
-    firebaseUiInstance.start('#firebaseui-auth-container', uiAuthConfig);
+    this.firebaseUIService.firebaseUiInstance.start('#firebaseui-auth-container', uiAuthConfig);
 
     if (resetCallbacks) {
       (this._firebaseUiConfig as NativeFirebaseUIAuthConfig).callbacks = null;
@@ -241,7 +241,7 @@ export class FirebaseuiAngularLibraryComponent implements OnInit, OnDestroy {
       return this.firebaseUiConfig.signInSuccessUrl;
     };
 
-    const signInFailureCallback = (error: firebaseuiEn.auth.AuthUIError) => {
+    const signInFailureCallback = (error: any ) => { // error type is firebaseuiEs.auth.AuthUIError
       this.ngZone.run(() => {
         this.signInFailureCallback.emit({
           code: error.code,

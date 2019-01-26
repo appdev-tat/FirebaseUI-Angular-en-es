@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import * as firebaseuiEs from 'firebaseui-en-es/dist/npm__es';
-import * as firebaseuiEn from 'firebaseui-en-es/dist/npm__en';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseuiAngularLibraryService {
-  public firebaseUiEnInstance: firebaseuiEn.auth.AuthUI;
-  public firebaseUiEsInstance: firebaseuiEs.auth.AuthUI;
+  public firebaseUiInstance: any;
 
-  constructor(angularFireAuth: AngularFireAuth) {
+  constructor( private angularFireAuth: AngularFireAuth ) {}
+    
+  init( library: any ) {
     // store the firebaseui instance on the window object to prevent double initialization
-    if (!(<any>window).firebaseUiEnInstance) {
-      (<any>window).firebaseUiEnInstance = new firebaseuiEn.auth.AuthUI(angularFireAuth.auth);
-      (<any>window).firebaseUiEsInstance = new firebaseuiEs.auth.AuthUI(angularFireAuth.auth);
+    if ( !(<any>window).firebaseUiInstance ) {
+      (<any>window).firebaseUiInstance = new library.auth.AuthUI( this.angularFireAuth.auth );
     }
-    this.firebaseUiEnInstance = (<any>window).firebaseUiEnInstance as firebaseuiEn.auth.AuthUI;
-    this.firebaseUiEsInstance = (<any>window).firebaseUiEsInstance as firebaseuiEs.auth.AuthUI;
+    this.firebaseUiInstance = (<any>window).firebaseUiInstance;
   }
 }

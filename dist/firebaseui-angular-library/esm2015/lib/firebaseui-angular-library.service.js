@@ -4,8 +4,6 @@
  */
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebaseuiEs from 'firebaseui-en-es/dist/npm__es';
-import * as firebaseuiEn from 'firebaseui-en-es/dist/npm__en';
 import * as i0 from "@angular/core";
 import * as i1 from "@angular/fire/auth";
 export class FirebaseuiAngularLibraryService {
@@ -13,13 +11,18 @@ export class FirebaseuiAngularLibraryService {
      * @param {?} angularFireAuth
      */
     constructor(angularFireAuth) {
+        this.angularFireAuth = angularFireAuth;
+    }
+    /**
+     * @param {?} library
+     * @return {?}
+     */
+    init(library) {
         // store the firebaseui instance on the window object to prevent double initialization
-        if (!((/** @type {?} */ (window))).firebaseUiEnInstance) {
-            ((/** @type {?} */ (window))).firebaseUiEnInstance = new firebaseuiEn.auth.AuthUI(angularFireAuth.auth);
-            ((/** @type {?} */ (window))).firebaseUiEsInstance = new firebaseuiEs.auth.AuthUI(angularFireAuth.auth);
+        if (!((/** @type {?} */ (window))).firebaseUiInstance) {
+            ((/** @type {?} */ (window))).firebaseUiInstance = new library.auth.AuthUI(this.angularFireAuth.auth);
         }
-        this.firebaseUiEnInstance = (/** @type {?} */ (((/** @type {?} */ (window))).firebaseUiEnInstance));
-        this.firebaseUiEsInstance = (/** @type {?} */ (((/** @type {?} */ (window))).firebaseUiEsInstance));
+        this.firebaseUiInstance = ((/** @type {?} */ (window))).firebaseUiInstance;
     }
 }
 FirebaseuiAngularLibraryService.decorators = [
@@ -34,8 +37,8 @@ FirebaseuiAngularLibraryService.ctorParameters = () => [
 /** @nocollapse */ FirebaseuiAngularLibraryService.ngInjectableDef = i0.defineInjectable({ factory: function FirebaseuiAngularLibraryService_Factory() { return new FirebaseuiAngularLibraryService(i0.inject(i1.AngularFireAuth)); }, token: FirebaseuiAngularLibraryService, providedIn: "root" });
 if (false) {
     /** @type {?} */
-    FirebaseuiAngularLibraryService.prototype.firebaseUiEnInstance;
+    FirebaseuiAngularLibraryService.prototype.firebaseUiInstance;
     /** @type {?} */
-    FirebaseuiAngularLibraryService.prototype.firebaseUiEsInstance;
+    FirebaseuiAngularLibraryService.prototype.angularFireAuth;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlyZWJhc2V1aS1hbmd1bGFyLWxpYnJhcnkuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2ZpcmViYXNldWktYW5ndWxhci8iLCJzb3VyY2VzIjpbImxpYi9maXJlYmFzZXVpLWFuZ3VsYXItbGlicmFyeS5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBQyxlQUFlLEVBQUMsTUFBTSxvQkFBb0IsQ0FBQztBQUNuRCxPQUFPLEtBQUssWUFBWSxNQUFNLCtCQUErQixDQUFDO0FBQzlELE9BQU8sS0FBSyxZQUFZLE1BQU0sK0JBQStCLENBQUM7OztBQUs5RCxNQUFNLE9BQU8sK0JBQStCOzs7O0lBSTFDLFlBQVksZUFBZ0M7UUFDMUMsc0ZBQXNGO1FBQ3RGLElBQUksQ0FBQyxDQUFDLG1CQUFLLE1BQU0sRUFBQSxDQUFDLENBQUMsb0JBQW9CLEVBQUU7WUFDdkMsQ0FBQyxtQkFBSyxNQUFNLEVBQUEsQ0FBQyxDQUFDLG9CQUFvQixHQUFHLElBQUksWUFBWSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ3hGLENBQUMsbUJBQUssTUFBTSxFQUFBLENBQUMsQ0FBQyxvQkFBb0IsR0FBRyxJQUFJLFlBQVksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN6RjtRQUNELElBQUksQ0FBQyxvQkFBb0IsR0FBRyxtQkFBQSxDQUFDLG1CQUFLLE1BQU0sRUFBQSxDQUFDLENBQUMsb0JBQW9CLEVBQTRCLENBQUM7UUFDM0YsSUFBSSxDQUFDLG9CQUFvQixHQUFHLG1CQUFBLENBQUMsbUJBQUssTUFBTSxFQUFBLENBQUMsQ0FBQyxvQkFBb0IsRUFBNEIsQ0FBQztJQUM3RixDQUFDOzs7WUFmRixVQUFVLFNBQUM7Z0JBQ1YsVUFBVSxFQUFFLE1BQU07YUFDbkI7Ozs7WUFOTyxlQUFlOzs7OztJQVFyQiwrREFBc0Q7O0lBQ3RELCtEQUFzRCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEluamVjdGFibGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7QW5ndWxhckZpcmVBdXRofSBmcm9tICdAYW5ndWxhci9maXJlL2F1dGgnO1xuaW1wb3J0ICogYXMgZmlyZWJhc2V1aUVzIGZyb20gJ2ZpcmViYXNldWktZW4tZXMvZGlzdC9ucG1fX2VzJztcbmltcG9ydCAqIGFzIGZpcmViYXNldWlFbiBmcm9tICdmaXJlYmFzZXVpLWVuLWVzL2Rpc3QvbnBtX19lbic7XG5cbkBJbmplY3RhYmxlKHtcbiAgcHJvdmlkZWRJbjogJ3Jvb3QnXG59KVxuZXhwb3J0IGNsYXNzIEZpcmViYXNldWlBbmd1bGFyTGlicmFyeVNlcnZpY2Uge1xuICBwdWJsaWMgZmlyZWJhc2VVaUVuSW5zdGFuY2U6IGZpcmViYXNldWlFbi5hdXRoLkF1dGhVSTtcbiAgcHVibGljIGZpcmViYXNlVWlFc0luc3RhbmNlOiBmaXJlYmFzZXVpRXMuYXV0aC5BdXRoVUk7XG5cbiAgY29uc3RydWN0b3IoYW5ndWxhckZpcmVBdXRoOiBBbmd1bGFyRmlyZUF1dGgpIHtcbiAgICAvLyBzdG9yZSB0aGUgZmlyZWJhc2V1aSBpbnN0YW5jZSBvbiB0aGUgd2luZG93IG9iamVjdCB0byBwcmV2ZW50IGRvdWJsZSBpbml0aWFsaXphdGlvblxuICAgIGlmICghKDxhbnk+d2luZG93KS5maXJlYmFzZVVpRW5JbnN0YW5jZSkge1xuICAgICAgKDxhbnk+d2luZG93KS5maXJlYmFzZVVpRW5JbnN0YW5jZSA9IG5ldyBmaXJlYmFzZXVpRW4uYXV0aC5BdXRoVUkoYW5ndWxhckZpcmVBdXRoLmF1dGgpO1xuICAgICAgKDxhbnk+d2luZG93KS5maXJlYmFzZVVpRXNJbnN0YW5jZSA9IG5ldyBmaXJlYmFzZXVpRXMuYXV0aC5BdXRoVUkoYW5ndWxhckZpcmVBdXRoLmF1dGgpO1xuICAgIH1cbiAgICB0aGlzLmZpcmViYXNlVWlFbkluc3RhbmNlID0gKDxhbnk+d2luZG93KS5maXJlYmFzZVVpRW5JbnN0YW5jZSBhcyBmaXJlYmFzZXVpRW4uYXV0aC5BdXRoVUk7XG4gICAgdGhpcy5maXJlYmFzZVVpRXNJbnN0YW5jZSA9ICg8YW55PndpbmRvdykuZmlyZWJhc2VVaUVzSW5zdGFuY2UgYXMgZmlyZWJhc2V1aUVzLmF1dGguQXV0aFVJO1xuICB9XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlyZWJhc2V1aS1hbmd1bGFyLWxpYnJhcnkuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2ZpcmViYXNldWktYW5ndWxhci8iLCJzb3VyY2VzIjpbImxpYi9maXJlYmFzZXVpLWFuZ3VsYXItbGlicmFyeS5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBQyxlQUFlLEVBQUMsTUFBTSxvQkFBb0IsQ0FBQzs7O0FBS25ELE1BQU0sT0FBTywrQkFBK0I7Ozs7SUFHMUMsWUFBcUIsZUFBZ0M7UUFBaEMsb0JBQWUsR0FBZixlQUFlLENBQWlCO0lBQUksQ0FBQzs7Ozs7SUFFMUQsSUFBSSxDQUFFLE9BQVk7UUFDaEIsc0ZBQXNGO1FBQ3RGLElBQUssQ0FBQyxDQUFDLG1CQUFLLE1BQU0sRUFBQSxDQUFDLENBQUMsa0JBQWtCLEVBQUc7WUFDdkMsQ0FBQyxtQkFBSyxNQUFNLEVBQUEsQ0FBQyxDQUFDLGtCQUFrQixHQUFHLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUUsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUUsQ0FBQztTQUN6RjtRQUNELElBQUksQ0FBQyxrQkFBa0IsR0FBRyxDQUFDLG1CQUFLLE1BQU0sRUFBQSxDQUFDLENBQUMsa0JBQWtCLENBQUM7SUFDN0QsQ0FBQzs7O1lBZEYsVUFBVSxTQUFDO2dCQUNWLFVBQVUsRUFBRSxNQUFNO2FBQ25COzs7O1lBSk8sZUFBZTs7Ozs7SUFNckIsNkRBQStCOztJQUVsQiwwREFBd0MiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcbmltcG9ydCB7QW5ndWxhckZpcmVBdXRofSBmcm9tICdAYW5ndWxhci9maXJlL2F1dGgnO1xyXG5cclxuQEluamVjdGFibGUoe1xyXG4gIHByb3ZpZGVkSW46ICdyb290J1xyXG59KVxyXG5leHBvcnQgY2xhc3MgRmlyZWJhc2V1aUFuZ3VsYXJMaWJyYXJ5U2VydmljZSB7XHJcbiAgcHVibGljIGZpcmViYXNlVWlJbnN0YW5jZTogYW55O1xyXG5cclxuICBjb25zdHJ1Y3RvciggcHJpdmF0ZSBhbmd1bGFyRmlyZUF1dGg6IEFuZ3VsYXJGaXJlQXV0aCApIHt9XHJcbiAgICBcclxuICBpbml0KCBsaWJyYXJ5OiBhbnkgKSB7XHJcbiAgICAvLyBzdG9yZSB0aGUgZmlyZWJhc2V1aSBpbnN0YW5jZSBvbiB0aGUgd2luZG93IG9iamVjdCB0byBwcmV2ZW50IGRvdWJsZSBpbml0aWFsaXphdGlvblxyXG4gICAgaWYgKCAhKDxhbnk+d2luZG93KS5maXJlYmFzZVVpSW5zdGFuY2UgKSB7XHJcbiAgICAgICg8YW55PndpbmRvdykuZmlyZWJhc2VVaUluc3RhbmNlID0gbmV3IGxpYnJhcnkuYXV0aC5BdXRoVUkoIHRoaXMuYW5ndWxhckZpcmVBdXRoLmF1dGggKTtcclxuICAgIH1cclxuICAgIHRoaXMuZmlyZWJhc2VVaUluc3RhbmNlID0gKDxhbnk+d2luZG93KS5maXJlYmFzZVVpSW5zdGFuY2U7XHJcbiAgfVxyXG59XHJcbiJdfQ==
