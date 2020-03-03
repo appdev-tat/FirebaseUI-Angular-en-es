@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
+import * as firebaseuiNamespace from 'firebaseui-en-es/dist'; // just for the namespace
 import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';

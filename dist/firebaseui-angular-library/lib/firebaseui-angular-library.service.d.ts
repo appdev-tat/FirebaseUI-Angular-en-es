@@ -1,8 +1,9 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebaseuiEs from 'firebaseui-en-es/dist/npm__es';
-import * as firebaseuiEn from 'firebaseui-en-es/dist/npm__en';
 export declare class FirebaseuiAngularLibraryService {
-    firebaseUiEnInstance: firebaseuiEn.auth.AuthUI;
-    firebaseUiEsInstance: firebaseuiEs.auth.AuthUI;
+    private angularFireAuth;
+    firebaseUiInstance: firebaseuiEs.auth.AuthUI;
+    currentLanguage: 'en' | 'es';
     constructor(angularFireAuth: AngularFireAuth);
+    getInstance(language: 'en' | 'es'): Promise<any>;
 }

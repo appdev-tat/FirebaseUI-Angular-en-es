@@ -20,11 +20,11 @@
     "url": "https://github.com/RaphaelJenni/firebaseui-angular/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^6.1.2",
-    "@angular/core": "^6.1.2",
-    "@angular/fire": "5.0.0",
+    "@angular/common": "^8.1.2",
+    "@angular/core": "^8.1.2",
+    "@angular/fire": "5.3.0",
     "git+https://github.com/appdev-tat/firebaseui-web-en-es": "^3.5.2",
-    "firebase": "^5.3.1"
+    "firebase": "^5.7.2"
   },
   "main": "bundles/firebaseui-angular.umd.js",
   "module": "fesm5/firebaseui-angular.js",

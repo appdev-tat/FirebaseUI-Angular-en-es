@@ -1,3 +1,7 @@
+This is a fork of the FirebaseUI-Angular library. It is an Angularized version of [firebaseui-web-en-es](https://github.com/appdev-tat/firebaseui-web-en-es).
+
+---
+
 [![Build Status](https://travis-ci.org/RaphaelJenni/FirebaseUI-Angular.svg?branch=master)](https://travis-ci.org/RaphaelJenni/FirebaseUI-Angular)
 [![npm version](https://badge.fury.io/js/firebaseui-angular.svg)](https://badge.fury.io/js/firebaseui-angular)
 
